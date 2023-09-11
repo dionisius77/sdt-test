@@ -1,0 +1,24 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:11.4-alpine
+    container_name: postgresdb
+    environment:
+      POSTGRES_PASSWORD: pgdefaultpassword
+      POSTGRES_USER: postgres
+      POSTGRES_DB: user
+    ports:
+      - '5433:5432'
+
+  user:
+    build:
+      dockerfile: Dockerfile.user
+    container_name: user
+    ports:
+      - "3001:3001"
+    restart: always
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+      - /app/admin/node_modules
