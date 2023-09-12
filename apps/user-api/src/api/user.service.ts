@@ -30,7 +30,7 @@ export class UserService {
     const timezones = await this.repositoryTimezone.find();
     const activeTimezones = timezones.filter(item => {
       const now = moment.utc(currentDate).utcOffset(item.offset * 60);
-      return now.hour() === 11
+      return now.hour() === 9
     });
     if (activeTimezones.length > 0) {
       const timezoneIds = activeTimezones.map(item => item.id);
